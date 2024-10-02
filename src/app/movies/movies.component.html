@@ -1,0 +1,37 @@
+<h1 *ngIf="moviesList.length>0;elseno_movies">{{title}}</h1>
+
+
+<h5 *ngIf="moviesList.length>0">
+    
+    <div class="alert alert-warning">
+        {{moviesList.length}}  film bulundu.
+
+        <ng-template [ngTemplateOutlet]=" movieList1"></ng-template>
+    </div>
+
+
+
+
+<ng-template #no_movies>
+    <div class="alert alert-warning">Film bulunamadı.
+    </div>
+</ng-template> 
+ 
+<ng-template #movieList1>
+    <div class="card mb-3" *ngFor="let item of moviesList">
+        <div class="row">
+            <div class="col-md-3">
+                <img src={{item.img}} height="300px" class="img-fluit rounded-start" alt="" />
+             </div>
+            <div class="col-md-9">
+    <div class="card-body">
+        <h2 class="card-title">{{item.title}}</h2>
+        <p class="card-text">{{item.desc}}</p>
+        <button class="btn btn-sm btn-outline-primary">Details</button>
+    </div>
+    
+            </div>
+    
+        </div>
+    </div>
+        </ng-template>
