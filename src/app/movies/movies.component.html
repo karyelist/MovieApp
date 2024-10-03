@@ -5,7 +5,10 @@
     
     <div class="alert alert-warning">
         {{moviesList.length}}  film bulundu.
-
+        <div class="mb-3">
+            <input [(ngModel)]="filterText" type="text" class="form-control" placeholder="Ara"/>
+            <small *ngIf="filterText" class="text-muted">Aradığınız Kelime {{filterText}}</small>
+        </div>
         <ng-template [ngTemplateOutlet]=" movieList1"></ng-template>
     </div>
 
@@ -18,7 +21,7 @@
 </ng-template> 
  
 <ng-template #movieList1>
-    <div class="card mb-3" *ngFor="let item of moviesList">
+    <div class="card mb-3" *ngFor="let item of moviesList | movieFilter:filterText">
         <div class="row">
             <div class="col-md-3">
                 <img src={{item.img}} height="300px" class="img-fluit rounded-start" alt="" />
