@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Injectable } from '@angular/core';
 import { Movie } from '../../../public/models/movie';
 import { MovieRepository } from '../../../public/models/movieRepository';
+ 
+ 
+declare let alertify:any;
 
 @Component({
   selector: 'app-movies',
@@ -30,11 +33,14 @@ AddList($event:any,movie: Movie){
   $event.target.classList.remove('btn-primary');
   $event.target.classList.add('btn-danger');
   $event.target.innerText="Listeden Çıkar";
+  alertify.success(movie.title + 'listeye eklendi');
   }
   else{
     $event.target.classList.remove('btn-danger');
   $event.target.classList.add('btn-primary');
   $event.target.innerText="Liste Ekle";
+  alertify.success(movie.title + 'listeden çıkarıldı');
+
   }
 
 }
