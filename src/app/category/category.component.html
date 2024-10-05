@@ -1,4 +1,6 @@
 <div class="list-group">
- <a *ngFor="let item of categories" href="#" class="list-group-item ist-group-item-action">{{item.name}}</a>
- 
+   
+ <a (click)="SelectCategory(item)" [class.active]="!displayAll && selectedCategory?.id == item.id" *ngFor="let item of categories" href="#" class="list-group-item ist-group-item-action">{{item.name}}</a>
+ <a (click)="SelectCategory()" [class.active]="displayAll"  class="list-group-item ist-group-item-action">Tüm Kategoriler</a>
+
 </div>

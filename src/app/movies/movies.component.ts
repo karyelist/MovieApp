@@ -24,6 +24,21 @@ export class MoviesComponent implements OnInit {
 
 }
 
+AddList($event:any,movie: Movie){
+  if($event.target.classList.contains('btn-primary'))
+  {
+  $event.target.classList.remove('btn-primary');
+  $event.target.classList.add('btn-danger');
+  $event.target.innerText="Listeden Çıkar";
+  }
+  else{
+    $event.target.classList.remove('btn-danger');
+  $event.target.classList.add('btn-primary');
+  $event.target.innerText="Liste Ekle";
+  }
+
+}
+
 }
 
  
