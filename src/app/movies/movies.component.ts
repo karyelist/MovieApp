@@ -1,9 +1,8 @@
 import { Component, OnInit,Injectable } from '@angular/core';
 import { Movie } from '../../../public/models/movie';
 import { MovieRepository } from '../../../public/models/movieRepository';
+import {AlertifyService} from '../services/alertify.service' 
  
- 
-declare let alertify:any;
 
 @Component({
   selector: 'app-movies',
@@ -17,7 +16,7 @@ export class MoviesComponent implements OnInit {
   title="Film Listesi";
   filterText:string="";
 
-  constructor() {
+  constructor(private alertify:AlertifyService) {
     this.movieRepository=new MovieRepository();
     this.moviesList = this.movieRepository.getMovies();
   }
@@ -33,13 +32,13 @@ AddList($event:any,movie: Movie){
   $event.target.classList.remove('btn-primary');
   $event.target.classList.add('btn-danger');
   $event.target.innerText="Listeden Çıkar";
-  alertify.success(movie.title + 'listeye eklendi');
+  this.alertify.success(movie.title + 'listeye eklendi');
   }
   else{
     $event.target.classList.remove('btn-danger');
   $event.target.classList.add('btn-primary');
   $event.target.innerText="Liste Ekle";
-  alertify.success(movie.title + 'listeden çıkarıldı');
+  this.alertify.error(movie.title + 'listeden çıkarıldı');
 
   }
 
