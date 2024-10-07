@@ -2,29 +2,36 @@ import { Component, OnInit,Injectable } from '@angular/core';
 import { Movie } from '../../../public/models/movie';
 import { MovieRepository } from '../../../public/models/movieRepository';
 import {AlertifyService} from '../services/alertify.service' 
+import { HttpClient } from '@angular/common/http';
+import { MovieService } from '../services/movie.service';
  
 
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.css']
+  styleUrls: ['./movies.component.css'],
+  providers: [MovieService]
 })
 export class MoviesComponent implements OnInit {
 
-  moviesList:Movie[];
-  movieRepository:MovieRepository;
+  moviesList:Movie[]=[];
+ // movieRepository:MovieRepository;
   title="Film Listesi";
   filterText:string="";
 
-  constructor(private alertify:AlertifyService) {
-    this.movieRepository=new MovieRepository();
-    this.moviesList = this.movieRepository.getMovies();
-  }
+  constructor(private alertify:AlertifyService,private movieService : MovieService) {
+  //  this.movieRepository=new MovieRepository();
+   }
   
   
   ngOnInit(): void {
+    this.movieService.getMovies().subscribe(data=> {
+      this.moviesList=data;
 
-}
+       
+    });
+ }
+
 
 AddList($event:any,movie: Movie){
   if($event.target.classList.contains('btn-primary'))
