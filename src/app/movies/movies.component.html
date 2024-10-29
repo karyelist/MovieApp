@@ -1,3 +1,7 @@
+<div class="alert alert-danger" *ngIf="error">
+    {{error.message}}
+</div>
+
 <h1 *ngIf="moviesList.length>0;elseno_movies">{{title}}</h1>
 
 

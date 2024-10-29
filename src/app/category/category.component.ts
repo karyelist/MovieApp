@@ -1,23 +1,26 @@
 import { Component,OnInit } from '@angular/core';
 import { Category } from '../../../public/models/category';
 import { CategoryRepository } from '../../../public/models/categoryRepository';
+import { CategoryService } from '../services/category.service';
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrl: './category.component.css'
+  styleUrl: './category.component.css',
+  providers:[CategoryService]
 })
 export class CategoryComponent implements OnInit {
   categories:Category[];
-  categoryRepository = new CategoryRepository;
-  selectedCategory: Category | null | undefined = null;
-  constructor(){
+   selectedCategory: Category | null | undefined = null;
 
-this.categoryRepository = new CategoryRepository();
-this.categories = this.categoryRepository.getCategories();
-  }
+  constructor(private categoryService: CategoryService) {
+    this.categories=[];
+   }
+
 ngOnInit(): void {
-  
+  this.categoryService.getCategories().subscribe(data=> {
+    this.categories=data;
+  });
 }
 
 displayAll=true;

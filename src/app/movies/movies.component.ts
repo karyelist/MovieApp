@@ -18,18 +18,18 @@ export class MoviesComponent implements OnInit {
  // movieRepository:MovieRepository;
   title="Film Listesi";
   filterText:string="";
+ error:any
+
 
   constructor(private alertify:AlertifyService,private movieService : MovieService) {
   //  this.movieRepository=new MovieRepository();
    }
   
-  
+   
   ngOnInit(): void {
     this.movieService.getMovies().subscribe(data=> {
-      this.moviesList=data;
-
-       
-    });
+      this.moviesList=data; 
+    },error=> this.error=error);
  }
 
 
